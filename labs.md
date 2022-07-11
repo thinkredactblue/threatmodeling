@@ -15,13 +15,11 @@
 
 ## Getting started & initializing Mitre-Assistant
 
-    You can find all the information on how to use mitre-assistant here: https://docs-ma.vercel.app/docs/project/Brief_Overview
-
-    Once you have acquired the binary via the steps above (ignore all links to GitHub since the project is only available in crate.io), you want to test it before working with Mitre-Assistant.
-
-    `mitre-assistant -h`
-
+    You can find all the information on how to use mitre-assistant here: https://docs-ma.vercel.app/docs/project/Brief_Overview. Once you have acquired the binary via the steps above (ignore all links to GitHub since the project is only available in crate.io), you want to test it before working with Mitre-Assistant.
     
+`mitre-assistant -h`
+
+
 
 
 
