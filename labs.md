@@ -15,13 +15,13 @@
 
 ## Getting started & initializing Mitre-Assistant
 
-1. You can find all the information on how to use mitre-assistant here: https://docs-ma.vercel.app/docs/project/Brief_Overview. 
+3. You can find all the information on how to use mitre-assistant here: https://docs-ma.vercel.app/docs/project/Brief_Overview. 
     
-2. Test that Mitre-Assistant is correctly installed:
+4. Test that Mitre-Assistant is correctly installed:
 
     `cargo install mitre-assistant`
 
-3. 
+5. 
 
 
 
