@@ -7,9 +7,9 @@
 
 1. Install Rust & Cargo: 
 
-https://doc.rust-lang.org/cargo/getting-started/installation.html
+    https://doc.rust-lang.org/cargo/getting-started/installation.html
 
 2. Install mitre assistant
 
-`cargo install mitre-assistant`
+    `cargo install mitre-assistant`
 
