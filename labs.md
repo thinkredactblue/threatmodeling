@@ -1,7 +1,10 @@
 <h1> Practical Threat Modeling with MITRE ATT&CK </h1>
 
+# Day 1 / Lab 1: Threat Modeling - Am I a Target?
 
-# Lab 2: Slicing and Dicing ATT&CK with MITRE Assistant
+Follow along using the MITRE ATT&CK Navigator https://mitre-attack.github.io/attack-navigator/enterprise/#
+
+# Day 1 / Lab 2: Slicing and Dicing ATT&CK with MITRE Assistant
 
 Mitre Assistant allows you to slice and dice the ATT&CK matrix quickly to get meaningful insights of what that matrix has to offer.
 
@@ -184,7 +187,30 @@ At this time Mitre Assistant does not export in MITRE Navigator format.
 
 As you can see, Mitre Assistant helps you to slice and dice the ATT&CK matrix quickly to get meaningful insights of what that matrix has to offer.
 
+# Day 2 / Lab 1 - Threat Modeling – Visibility & Coverage
 
+## Setup
+
+1. Install docker for your platform
+    - https://docs.docker.com/get-docker/
+
+2. Get the latest image for DeTT&CT from Docker Hub
+    `docker pull rabobankcdc/dettect:latest`
+
+3. Execute the appropriate command to create the container and mount the input and output directories
+
+- Linux and MacOS: 
+    `docker run -p 8080:8080 -v $(pwd)/output:/opt/DeTTECT/output -v $(pwd)/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+
+- Windows (cmd.exe): 
+    `docker run -p 8080:8080 -v %cd%/output:/opt/DeTTECT/output -v %cd%/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+    
+- PowerShell: 
+    `docker run -p 8080:8080 -v ${PWD}/output:/opt/DeTTECT/output -v ${PWD}/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+
+# Day 2 / Lab 2 - Cyballistics – Follow the Weapons with VirusTotal 
+
+Follow the instructions given in class to obtain your temporary Virustotal Intelligence license. 
 
 
 
