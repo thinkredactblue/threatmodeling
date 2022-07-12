@@ -321,8 +321,6 @@ Follow the instructions given in class to obtain your temporary Virustotal Intel
 
 - Samples where wscript is observed executing .vbs files, through behavioral analysis (sandboxes)
 
-- Any Microsoft Word (docx) file with the following e-mail address: box-bmv@yandex.ru.
-
 - Google drive URLs with more than 20 detections.
 
 - PCAPs tagged with exploit-kit.
@@ -391,12 +389,6 @@ behavior_network:"gate.php"
 
 ```text  
 behavior_files:"wscript.exe" behavior_files:".vbs"
-```
-
-- Any Microsoft Word (docx) file with the following e-mail address: box-bmv@yandex.ru
-
-```text
-type:docx metadata:"box-bmv@yandex.ru"
 ```
 
 - Google drive URLs with more than 20 detections:
