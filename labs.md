@@ -1,4 +1,6 @@
 <h1> Practical Threat Modeling with MITRE ATT&CK </h1>
+by Ismael Valenzuela
+@aboutsecurity / @thinkredactblue
 
 # Day 1 / Lab 1: Threat Modeling - Am I a Target?
 
