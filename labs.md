@@ -33,7 +33,9 @@ The DeTT&CT framework consists of a Python tool, YAML administration files, the 
 2. Get the latest image for DeTT&CT from Docker Hub
     `docker pull rabobankcdc/dettect:latest`
 
-3. Execute the appropriate command to create the container and mount the input and output directories. These directories will be created in your current working directory.
+   ** Note, if you have Apple Silicon M1/M2 you'll need to run this command to specify the platform `export DOCKER_DEFAULT_PLATFORM=linux/x86_64/v8`
+
+4. Execute the appropriate command to create the container and mount the input and output directories. These directories will be created in your current working directory.
 
 - Linux and MacOS: 
     `docker run -p 8080:8080 -v $(pwd)/output:/opt/DeTTECT/output -v $(pwd)/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
