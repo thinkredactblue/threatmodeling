@@ -11,6 +11,7 @@ Mitre Assistant allows you to slice and dice the ATT&CK matrix quickly to get me
 Mitre Assistant was created and is maintained by Carlos Diaz (@dfirence)
 
 Follow along using https://github.com/dfirence/ma-insights-xe
+
 More info on the project on Carlos' GitHub repo: https://github.com/dfirence/ma-insights-xe
 
 Overview statistics - https://ma-insights.vercel.app/overview
