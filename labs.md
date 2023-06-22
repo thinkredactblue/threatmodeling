@@ -54,7 +54,7 @@ The DeTT&CT framework consists of a Python tool, YAML administration files, the 
 
 1. Using the local editor 
 
-    `python dettect.py editor`
+    `python dettect.py editor &`
 
 2. Alternatively you can also use the online editor
 
