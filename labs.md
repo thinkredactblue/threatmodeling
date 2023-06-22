@@ -38,13 +38,13 @@ The DeTT&CT framework consists of a Python tool, YAML administration files, the 
 4. Execute the appropriate command to create the container and mount the input and output directories. These directories will be created in your current working directory.
 
 - Linux and MacOS: 
-    `docker run -p 8080:8080 -v $(pwd)/output:/opt/DeTTECT/output -v $(pwd)/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+    `docker run -p 8080:8080 -v $(pwd)/output:/opt/DeTTECT/output -v $(pwd)/input:/opt/DeTTECT/input --name dettect -it --rm rabobankcdc/dettect:latest /bin/bash`
 
 - Windows (cmd.exe): 
-    `docker run -p 8080:8080 -v %cd%/output:/opt/DeTTECT/output -v %cd%/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+    `docker run -p 8080:8080 -v %cd%/output:/opt/DeTTECT/output -v %cd%/input:/opt/DeTTECT/input --name dettect -it --rm rabobankcdc/dettect:latest /bin/bash`
     
 - PowerShell: 
-    `docker run -p 8080:8080 -v ${PWD}/output:/opt/DeTTECT/output -v ${PWD}/input:/opt/DeTTECT/input --name dettect -it rabobankcdc/dettect:latest /bin/bash`
+    `docker run -p 8080:8080 -v ${PWD}/output:/opt/DeTTECT/output -v ${PWD}/input:/opt/DeTTECT/input --name dettect -it --rm rabobankcdc/dettect:latest /bin/bash`
 
 - To start the container when it is no longer running (this should bring you straight back into the container with an interactive Bash shell)
 
