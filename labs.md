@@ -14,10 +14,10 @@ Follow along using https://github.com/dfirence/ma-insights-xe
 
 More info on the project on Carlos' GitHub repo: https://github.com/dfirence/ma-insights-xe
 
-Overview statistics - https://ma-insights.vercel.app/overview
-Stats by adversary - https://ma-insights.vercel.app/adversaries
-Stats by tactics, techniques, and data source - https://ma-insights.vercel.app/enterprise
-Stats by weapons (malware and tools) - https://ma-insights.vercel.app/weapons
+    - Overview statistics - https://ma-insights.vercel.app/overview
+    - Stats by adversary - https://ma-insights.vercel.app/adversaries
+    - Stats by tactics, techniques, and data source - https://ma-insights.vercel.app/enterprise
+    - Stats by weapons (malware and tools) - https://ma-insights.vercel.app/weapons
 
 # Day 2 / Lab 1 - Threat Modeling – Visibility & Coverage
 
@@ -254,7 +254,7 @@ For a full reference on VT file search modifiers check this reference:
 https://support.virustotal.com/hc/en-us/articles/360001385897-File-search-modifiers
 
 
-# Day 2 / Lab 3 - Cyballistics – Follow the Weapons with VirusTotal 
+# Day 2 / Lab 3 - Cyballistics – From ATT&CK to D3FEND 
 
 1. Use the Jupyter Notebook here
 
