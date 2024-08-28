@@ -197,7 +197,9 @@ type:rtf have:execution_parents p:10+
 
 Notice how again the tags give us more context on what these samples are doing. Not only we know they contain macros, as expected, but we can also see the vulnerability that's being exploited, in this case CVE-2017-11882. You can pivot and expand the results by clicking on any of those tags.
 
-As you can see, despite being patched for three years already, attackers are still relying on this old remote code execution vulnerability in Microsoft Office to infect victims with malware. According to the threat analysis report from HP Bromium, the flaw accounts for nearly three-quarters of all exploits leveraged in Q4 2020. You can find more information on CVE-2017-11882 and associated mitigations here: https://socprime.com/blog/cve-2017-11882-two-decades-old-vulnerability-in-microsoft-office-still-actively-leveraged-for-malware-delivery/
+As you can see, despite being patched for years already, attackers are still relying on this old remote code execution vulnerability in Microsoft Office to infect victims with malware. You can find more information on CVE-2017-11882 and associated mitigations here: https://socprime.com/blog/cve-2017-11882-two-decades-old-vulnerability-in-microsoft-office-still-actively-leveraged-for-malware-delivery/
+
+Another well known vulnerability (CVE-2017-0199) allows remote code execution against old versions of Microsoft Office and Windows, and has been a very popular vector of attack, with more than 5,600 malware samples exploiting the issue this year, including 15 malicious samples reported from Egypt, according to BlackBerry: https://www.darkreading.com/cyberattacks-data-breaches/india-linked-sidewinder-group-pivots-to-hacking-maritime-targets
 
 We can now pivot and expand our search, to find any samples submitted to VT that have been tagged with this specific Common Vulnerability and Exposure (CVE) identifier and with the tag exploit:
 
