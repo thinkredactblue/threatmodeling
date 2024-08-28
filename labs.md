@@ -19,7 +19,117 @@ More info on the project on Carlos' GitHub repo: https://github.com/dfirence/ma-
 - Stats by tactics, techniques, and data source - https://ma-insights.vercel.app/enterprise
 - Stats by weapons (malware and tools) - https://ma-insights.vercel.app/weapons
 
-# Day 2 / Lab 1 - Threat Modeling – Visibility & Coverage
+# Day 2 / Lab 1 - Cyballistics – Follow the Weapons with VirusTotal 
+
+Follow the instructions given in class to obtain your temporary Virustotal Intelligence license. Login to VT with your account, and using the advanced search modifiers in VT Enterprise, find relevant patterns or behaviors for:
+
+- Microsoft Word documents (doc) that have macros, that execute files and that have Cyrillic language in the metadata.
+
+- PHP files named gate.php that have been observed as part of network communications (useful to find samples that exhibit specific Command and Control behavior).
+
+- Samples where wscript is observed executing .vbs files, through behavioral analysis (sandboxes)
+
+- Google drive URLs with more than 20 detections.
+
+- PCAPs tagged with exploit-kit.
+
+- Samples that modify a specific registry key for persistence purposes.
+
+- PDFs that contain JavScript and contains an automatic action (perhaps to launch the previous JavaScript).
+
+We already identified that Hacme Cats needs to focus on increasing visibility and detection on Spearphishing Attachments, among others techniques. 
+  
+Spearphishing Attachments is a Sub-Technique of Technique T1566 in the MITRE ATT&CK Matrix, part of the Initial Access Tactic. 
+
+Since we're studying Phishing, and more specifically Spear-Phishing techniques, we can ask the 'Google of malware' to research samples exhibiting malicious behaviors. A quick look at MITRE's description for this technique show us threat groups that are quite active at the time of this writing, and that have been involved with popular campaigns like Ryuk ransomware, Emotet, Trickbot or Bazar. We're talking about the Wizard Spider or UNC1878 group: https://attack.mitre.org/groups/G0102/
+
+Notice how this group makes active use of Microsoft documents containing macros or PDFs containing malicious links to download either Emotet, Bokbot, TrickBot, or Bazar. 
+
+Let's make this more actionable and try to expand our understanding of how attackers (any attacker, not just Wizard Spider) make use of these documents. In order to try to extract a study base of malicious PDFs from VirusTotal the first idea that comes to our minds is to use a search query as simple as:
+
+```text
+type:pdf positives:5+
+```
+
+This query returns PDF files that are detected by five antivirus solutions or more. Make sure you are signed in with your activated account, since this is a privileged functionality in VT.
+
+We can learn more of these samples by selecting any of them. The tags added by VT gives us an indication of the behavior of these files. For example, we can observe that some of them make use of sandbox evasion techniques to defeat analysts and security products. Notice the `detect-debug-environment` tag. 
+
+Compare the results of this search, with the results of the next one. This query searches for Excel spreadsheets (xls) that execute other processes and that have been reported by more than 10 antivirus engines:
+
+```text
+type:xls have:execution_parents p:10+
+```
+
+Notice how the tags give us more context on what these samples are doing. You can pivot and expand the results by clicking on any of those tags.
+
+Let's do a similar search but this time for RTF documents that execute other processes and that have been reported by 10 AV engines or more:
+
+```text
+type:rtf have:execution_parents p:10+
+```
+
+Notice how again the tags give us more context on what these samples are doing. Not only we know they contain macros, as expected, but we can also see the vulnerability that's being exploited, in this case CVE-2017-11882. You can pivot and expand the results by clicking on any of those tags.
+
+As you can see, despite being patched for years already, attackers are still relying on this old remote code execution vulnerability in Microsoft Office to infect victims with malware. You can find more information on CVE-2017-11882 and associated mitigations here: https://socprime.com/blog/cve-2017-11882-two-decades-old-vulnerability-in-microsoft-office-still-actively-leveraged-for-malware-delivery/
+
+Another well known vulnerability (CVE-2017-0199) allows remote code execution against old versions of Microsoft Office and Windows, and has been a very popular vector of attack, with more than 5,600 malware samples exploiting the issue this year, including 15 malicious samples reported from Egypt, according to BlackBerry: https://www.darkreading.com/cyberattacks-data-breaches/india-linked-sidewinder-group-pivots-to-hacking-maritime-targets
+
+We can now pivot and expand our search, to find any samples submitted to VT that have been tagged with this specific Common Vulnerability and Exposure (CVE) identifier and with the tag exploit:
+
+```text
+tag:cve-2017-11882 tag:exploit
+```
+
+VT Intelligence allows you to run very specific searches. Now take some time to 'fly solo' and experiment with additional searches like:
+
+- Microsoft Word documents (doc) that have macros, that execute files and that have Cyrillic language in the metadata.
+
+```text
+type:doc p:10+ tag:macros tag:run-file metadata:Cyrillic
+```
+
+- PHP files named gate.php that have been observed as part of network communications (useful to find samples that exhibit specific Command and Control behavior).
+
+```text  
+behavior_network:"gate.php"
+```
+
+- Samples where wscript is observed executing .vbs files, through behavioral analysis (sandboxes)
+
+```text  
+behavior_files:"wscript.exe" behavior_files:".vbs"
+```
+
+- Google drive URLs with more than 20 detections:
+
+```text
+p:20+ itw:"drive.google.com" 
+```  
+
+- PCAPs tagged with exploit-kit:
+
+```text
+type:pcap tag:"exploit-kit" 
+```  
+
+- Samples that modify a specific registry key for persistence purposes:
+
+```text
+behavior_registry:"Software\Microsoft\Windows\CurrentVersion\Run"
+```  
+
+- PDFs that contain JavScript and contains an automatic action (perhaps to launch the previous JavaScript):
+
+```text
+type:pdf tag:autoaction tag:js-embedded
+```  
+
+For a full reference on VT file search modifiers check this reference:
+
+https://support.virustotal.com/hc/en-us/articles/360001385897-File-search-modifiers
+
+# Day 2 / Lab 2 - Threat Modeling – Visibility & Coverage
 
 DeTT&CT aims to assist blue teams in using ATT&CK to score and compare data log source quality, visibility coverage, detection coverage and threat actor behaviours.
 
@@ -144,117 +254,6 @@ You can compare a group YAML file with, for example, data on a red team exercise
 14. Do the same for visibility
 
     `python dettect.py g -g threat-actor-data/20210331-RedCanary.yaml -o sample-data/techniques-administration-endpoints.yaml -t visibility`
-
-# Day 2 / Lab 2 - Cyballistics – Follow the Weapons with VirusTotal 
-
-Follow the instructions given in class to obtain your temporary Virustotal Intelligence license. Login to VT with your account, and using the advanced search modifiers in VT Enterprise, find relevant patterns or behaviors for:
-
-- Microsoft Word documents (doc) that have macros, that execute files and that have Cyrillic language in the metadata.
-
-- PHP files named gate.php that have been observed as part of network communications (useful to find samples that exhibit specific Command and Control behavior).
-
-- Samples where wscript is observed executing .vbs files, through behavioral analysis (sandboxes)
-
-- Google drive URLs with more than 20 detections.
-
-- PCAPs tagged with exploit-kit.
-
-- Samples that modify a specific registry key for persistence purposes.
-
-- PDFs that contain JavScript and contains an automatic action (perhaps to launch the previous JavaScript).
-
-We already identified that Hacme Cats needs to focus on increasing visibility and detection on Spearphishing Attachments, among others techniques. 
-  
-Spearphishing Attachments is a Sub-Technique of Technique T1566 in the MITRE ATT&CK Matrix, part of the Initial Access Tactic. 
-
-Since we're studying Phishing, and more specifically Spear-Phishing techniques, we can ask the 'Google of malware' to research samples exhibiting malicious behaviors. A quick look at MITRE's description for this technique show us threat groups that are quite active at the time of this writing, and that have been involved with popular campaigns like Ryuk ransomware, Emotet, Trickbot or Bazar. We're talking about the Wizard Spider or UNC1878 group: https://attack.mitre.org/groups/G0102/
-
-Notice how this group makes active use of Microsoft documents containing macros or PDFs containing malicious links to download either Emotet, Bokbot, TrickBot, or Bazar. 
-
-Let's make this more actionable and try to expand our understanding of how attackers (any attacker, not just Wizard Spider) make use of these documents. In order to try to extract a study base of malicious PDFs from VirusTotal the first idea that comes to our minds is to use a search query as simple as:
-
-```text
-type:pdf positives:5+
-```
-
-This query returns PDF files that are detected by five antivirus solutions or more. Make sure you are signed in with your activated account, since this is a privileged functionality in VT.
-
-We can learn more of these samples by selecting any of them. The tags added by VT gives us an indication of the behavior of these files. For example, we can observe that some of them make use of sandbox evasion techniques to defeat analysts and security products. Notice the `detect-debug-environment` tag. 
-
-Compare the results of this search, with the results of the next one. This query searches for Excel spreadsheets (xls) that execute other processes and that have been reported by more than 10 antivirus engines:
-
-```text
-type:xls have:execution_parents p:10+
-```
-
-Notice how the tags give us more context on what these samples are doing. You can pivot and expand the results by clicking on any of those tags.
-
-Let's do a similar search but this time for RTF documents that execute other processes and that have been reported by 10 AV engines or more:
-
-```text
-type:rtf have:execution_parents p:10+
-```
-
-Notice how again the tags give us more context on what these samples are doing. Not only we know they contain macros, as expected, but we can also see the vulnerability that's being exploited, in this case CVE-2017-11882. You can pivot and expand the results by clicking on any of those tags.
-
-As you can see, despite being patched for years already, attackers are still relying on this old remote code execution vulnerability in Microsoft Office to infect victims with malware. You can find more information on CVE-2017-11882 and associated mitigations here: https://socprime.com/blog/cve-2017-11882-two-decades-old-vulnerability-in-microsoft-office-still-actively-leveraged-for-malware-delivery/
-
-Another well known vulnerability (CVE-2017-0199) allows remote code execution against old versions of Microsoft Office and Windows, and has been a very popular vector of attack, with more than 5,600 malware samples exploiting the issue this year, including 15 malicious samples reported from Egypt, according to BlackBerry: https://www.darkreading.com/cyberattacks-data-breaches/india-linked-sidewinder-group-pivots-to-hacking-maritime-targets
-
-We can now pivot and expand our search, to find any samples submitted to VT that have been tagged with this specific Common Vulnerability and Exposure (CVE) identifier and with the tag exploit:
-
-```text
-tag:cve-2017-11882 tag:exploit
-```
-
-VT Intelligence allows you to run very specific searches. Now take some time to 'fly solo' and experiment with additional searches like:
-
-- Microsoft Word documents (doc) that have macros, that execute files and that have Cyrillic language in the metadata.
-
-```text
-type:doc p:10+ tag:macros tag:run-file metadata:Cyrillic
-```
-
-- PHP files named gate.php that have been observed as part of network communications (useful to find samples that exhibit specific Command and Control behavior).
-
-```text  
-behavior_network:"gate.php"
-```
-
-- Samples where wscript is observed executing .vbs files, through behavioral analysis (sandboxes)
-
-```text  
-behavior_files:"wscript.exe" behavior_files:".vbs"
-```
-
-- Google drive URLs with more than 20 detections:
-
-```text
-p:20+ itw:"drive.google.com" 
-```  
-
-- PCAPs tagged with exploit-kit:
-
-```text
-type:pcap tag:"exploit-kit" 
-```  
-
-- Samples that modify a specific registry key for persistence purposes:
-
-```text
-behavior_registry:"Software\Microsoft\Windows\CurrentVersion\Run"
-```  
-
-- PDFs that contain JavScript and contains an automatic action (perhaps to launch the previous JavaScript):
-
-```text
-type:pdf tag:autoaction tag:js-embedded
-```  
-
-For a full reference on VT file search modifiers check this reference:
-
-https://support.virustotal.com/hc/en-us/articles/360001385897-File-search-modifiers
-
 
 # Day 2 / Lab 3 - From ATT&CK to D3FEND 
 
