@@ -8,16 +8,14 @@ Follow along using the MITRE ATT&CK Navigator https://mitre-attack.github.io/att
 
 Mitre Assistant allows you to slice and dice the ATT&CK matrix quickly to get meaningful insights of what that matrix has to offer.
 
-Mitre Assistant was created and is maintained by Carlos Diaz (@dfirence)
+Mitre Assistant was created by Carlos Diaz (@dfirence) and maintained under the new All Around Defender platform.
 
-Follow along using https://github.com/dfirence/ma-insights-xe
+Follow along using https://www.allarounddefender.io
 
-More info on the project on Carlos' GitHub repo: https://github.com/dfirence/ma-insights-xe
-
-- Overview statistics - https://ma-insights.vercel.app/overview
-- Stats by adversary - https://ma-insights.vercel.app/adversaries
-- Stats by tactics, techniques, and data source - https://ma-insights.vercel.app/enterprise
-- Stats by weapons (malware and tools) - https://ma-insights.vercel.app/weapons
+- Overview statistics - https://www.allarounddefender.io/overview
+- Stats by adversary - https://www.allarounddefender.io/adversaries
+- Stats by tactics, techniques, and data source - https://www.allarounddefender.io/enterprise
+- Stats by weapons (malware and tools) - https://www.allarounddefender.io/weapons
 
 # Day 2 / Lab 1 - Threat Modeling – Visibility & Coverage
 
